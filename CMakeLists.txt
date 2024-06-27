@@ -177,7 +177,8 @@ elseif ((CMAKE_Fortran_COMPILER_ID STREQUAL "NVHPC") OR (CMAKE_Fortran_COMPILER_
 
     if (CMAKE_BUILD_TYPE STREQUAL "Release")
         add_compile_options(
-            $<$<COMPILE_LANGUAGE:Fortran:-minline>
+            $<$<COMPILE_LANGUAGE:Fortran:-Minline>
+	    -Minfo=inline
         )
     elseif (CMAKE_BUILD_TYPE STREQUAL "Debug")
         add_compile_options(
@@ -211,7 +212,8 @@ if (CMAKE_BUILD_TYPE STREQUAL "Release")
     CHECK_IPO_SUPPORTED(RESULT SUPPORTS_IPO OUTPUT IPO_ERROR)
     if (SUPPORTS_IPO)
         message(STATUS "Enabled IPO / LTO")
-        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+	# NOTE: Disable this only for NVHPC -- the flag CMake passes here is deprecated.
+	# set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
     else()
         message(STATUS "IPO / LTO is NOT available")
     endif()

@@ -486,13 +486,13 @@ cmake_parse_arguments(ARGS "OpenACC;MPI;SILO;HDF5;FFTW" "TARGET" "SOURCES" ${ARG
 
             # GH-200 Unified Memory Support
             if (MFC_Unified)
-                # target_compile_options(${ARGS_TARGET}
-                #     PRIVATE -gpu=unified
-                # )
-                # # "This option must appear in both the compile and link lines" -- NVHPC Docs
-                # target_link_options(${ARGS_TARGET}
-                #     PRIVATE -gpu=unified
-                # )
+                target_compile_options(${ARGS_TARGET}
+                    PRIVATE -gpu=unified
+                )
+                # "This option must appear in both the compile and link lines" -- NVHPC Docs
+                target_link_options(${ARGS_TARGET}
+                    PRIVATE -gpu=unified
+                )
             endif()
 
             if (CMAKE_BUILD_TYPE STREQUAL "Debug")

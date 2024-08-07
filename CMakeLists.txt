@@ -376,8 +376,8 @@ HANDLE_SOURCES(syscheck OFF)
 
 function(MFC_SETUP_TARGET)
 cmake_parse_arguments(ARGS "OpenACC;MPI;SILO;HDF5;FFTW" "TARGET" "SOURCES" ${ARGN})
-  # Here we need to split into "library" and "executable" to perform IPO on the NVIDIA compiler.
-  # A little hacky, but it *is* an edge-case for *one* compiler.
+    # Here we need to split into "library" and "executable" to perform IPO on the NVIDIA compiler.
+    # A little hacky, but it *is* an edge-case for *one* compiler.
     if (NVHPC_USE_TWO_PASS_IPO)
         add_library(${ARGS_TARGET}_lib OBJECT ${ARGS_SOURCES})
         target_compile_options(${ARGS_TARGET}_lib PRIVATE 
